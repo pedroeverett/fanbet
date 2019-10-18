@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import fetch from "node-fetch";
 
 const PanelWraper = styled('div')`
   display: flex;
@@ -30,7 +31,21 @@ class App extends Component {
     }
   }
 
+  async componentDidMount() {
+    try {
+      const resp = await fetch('https://gist.githubusercontent.com/liamjdouglas/bb40ee8721f1a9313c22c6ea0851a105/raw/6b6fc89d55ebe4d9b05c1469349af33651d7e7f1/Player.json')
+      const data = await resp.json()
+      this.setState({
+            players: data.players
+       })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   render () {
+    const { players } = this.state;
+    console.log('Players',players);
     return (
       <div className="App-main">
         <Header>
