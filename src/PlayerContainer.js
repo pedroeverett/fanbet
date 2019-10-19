@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Button } from 'semantic-ui-react';
 
 const PlayerWraper = styled('div')`
   text-align: center;
@@ -16,14 +17,14 @@ const Image = styled('img')`
   width: 200px;
 `;
 
-const PlayerContainer = ({ player }) => {
-    console.log(player);
+const PlayerContainer = ({ player, onClick }) => {
   return (
     <PlayerWraper>
         <div>
           <Image src={player.images.default.url} alt={player.first_name} />
           <PlayerName>Name: {player.first_name} {player.last_name}</PlayerName>
         </div>
+        <Button onClick={onClick}>Choose Player</Button>
     </PlayerWraper>
   );
 };

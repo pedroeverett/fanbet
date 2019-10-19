@@ -3,6 +3,7 @@ import PlayerContainer from './PlayerContainer';
 import { sampleSize } from 'lodash';
 import styled from 'styled-components';
 import fetch from "node-fetch";
+import './styles.global.css';
 
 const PanelWraper = styled('div')`
   display: flex;
@@ -30,7 +31,9 @@ class App extends Component {
     super();
     this.state = {
       players: [],
-      randomPlayers: []
+      randomPlayers: [],
+      selectedPlayer:{},
+      score: 0,
     }
   }
 
@@ -47,10 +50,19 @@ class App extends Component {
     }
   }
 
+  setSelectedPlayer(player) {
+    this.setState({
+      selectedPlayer: player
+    });
+  }
+
+  handleChoosenPlayer(player) {
+    this.setSelectedPlayer(player)
+  }
+
   render () {
-    const { players, randomPlayers } = this.state;
-    console.log('Players',players);
-    console.log('randomPlayers',randomPlayers);
+    const { players, randomPlayers , selectedPlayer} = this.state;
+    console.log('selectedPlayer',selectedPlayer);
     return (
       <div className="App-main">
         <Header>
@@ -58,7 +70,7 @@ class App extends Component {
         </Header>
         <PanelWraper>
         {randomPlayers.map((player, index) =>
-            <PlayerContainer player={player} key={index} />
+            <PlayerContainer player={player} key={index} onClick={() => this.handleChoosenPlayer(player)}/>
           )}
         </PanelWraper>
       </div>
