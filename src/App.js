@@ -26,6 +26,12 @@ const AppName = styled('h1')`
   padding-left: 50px;
 `;
 
+const Score = styled('h1')`
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+`;
+
 class App extends Component {
   constructor() {
     super();
@@ -34,6 +40,7 @@ class App extends Component {
       randomPlayers: [],
       selectedPlayer:{},
       score: 0,
+      win: null
     }
   }
 
@@ -50,6 +57,34 @@ class App extends Component {
     }
   }
 
+  getSecondPlayer(player, randomPlayers) {
+    let secondPlayer = {};
+    randomPlayers.forEach( randomPlayer => {
+      if (JSON.stringify(randomPlayer) !== JSON.stringify(player))
+      secondPlayer = randomPlayer;
+    });
+    return secondPlayer;
+  }
+
+  checkBestPlayer(player, secondPlayer) {
+      if (player.fppg > secondPlayer.fppg) {
+        const newScore = this.addScore()
+        this.setState({
+          win: true,
+          score: newScore
+        });
+      } else {
+        this.setState({
+          win: false
+        });
+      }
+  }
+
+  addScore() {
+    let score = this.state.score;
+    return score += 1;
+  }
+
   setSelectedPlayer(player) {
     this.setState({
       selectedPlayer: player
@@ -58,15 +93,18 @@ class App extends Component {
 
   handleChoosenPlayer(player) {
     this.setSelectedPlayer(player)
+    const secondPlayer = this.getSecondPlayer(player, this.state.randomPlayers);
+    this.checkBestPlayer(player, secondPlayer);
   }
 
   render () {
-    const { players, randomPlayers , selectedPlayer} = this.state;
+    const { players, randomPlayers , selectedPlayer, score } = this.state;
     console.log('selectedPlayer',selectedPlayer);
     return (
       <div className="App-main">
         <Header>
           <AppName>FanBet - Make Your bets</AppName>
+          <Score>Your Score: {score}</Score>
         </Header>
         <PanelWraper>
         {randomPlayers.map((player, index) =>
