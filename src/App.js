@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PlayerContainer from './PlayerContainer';
 import ResultModal from './ResultModal';
 import { sample, sampleSize, isEmpty } from 'lodash';
-import styled from 'styled-components';
 import fetch from "node-fetch";
+import styled from 'styled-components';
 import './styles.global.css';
+
 
 const PanelWraper = styled('div')`
   display: flex;
@@ -41,7 +42,7 @@ class App extends Component {
       randomPlayers: [],
       selectedPlayer:{},
       score: 0,
-      win: null
+      win: null,
     }
   }
 
@@ -52,7 +53,7 @@ class App extends Component {
       this.setState({
             players: data.players,
             randomPlayers: sampleSize(data.players, 2),
-       })
+      })
     } catch (e) {
       console.log(e)
     }
@@ -116,15 +117,15 @@ class App extends Component {
     });
   }
 
+  handleClick(players) {
+    this.setRandomPlayers(players);
+    this.setSelectedPlayer();
+  }
+
   handleChoosenPlayer(player) {
     this.setSelectedPlayer(player)
     const secondPlayer = this.getSecondPlayer(player, this.state.randomPlayers);
     this.checkBestPlayer(player, secondPlayer);
-  }
-
-  handleClick(players) {
-    this.setRandomPlayers(players);
-    this.setSelectedPlayer();
   }
 
   restartGame(players) {
@@ -137,8 +138,7 @@ class App extends Component {
   }
 
   render () {
-    const { players, randomPlayers , selectedPlayer, score, win } = this.state;
-    console.log('selectedPlayer',selectedPlayer);
+    const { players, randomPlayers, score, selectedPlayer, win } = this.state;
     const isSelected = isEmpty(selectedPlayer);
     const winner = score === 10;
     return (
@@ -148,7 +148,7 @@ class App extends Component {
           <Score>Your Score: {score}</Score>
         </Header>
         <PanelWraper>
-        {randomPlayers.map((player, index) =>
+          {randomPlayers.map((player, index) =>
             <PlayerContainer player={player} key={index} onClick={() => this.handleChoosenPlayer(player)}/>
           )}
         </PanelWraper>
@@ -170,7 +170,6 @@ class App extends Component {
       </div>
     );
   }
-
 }
 
 export default App;
