@@ -63,12 +63,14 @@ class App extends Component {
     const winMessages = [
       'Great, you have won this round.',
       'Congrats you are the man!! Keep playing',
-      'Damm, you are the winner'
+      'Dam, you are the winner',
+      'You are doing great. Keep going.'
     ]
     const looseMessages = [
       'Oopss, you lost. Better luck next time',
       'You lost!! I can see you need to read about your players.. Better luck next time',
-      'You lost. Dont dispair, try again'
+      'You lost. Do not despair, try again',
+      'You lost this time. Try again, next time you might win.'
     ]
     if (win) {
       return sample(winMessages)

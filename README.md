@@ -18,11 +18,12 @@ Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 
-## Running the App
+## Using the App
 
-Clicking `Choose Player` in one of the two displayed players, will make you bet on the player you want. After that a modal scheen will come up, showing you the FPPG score of that player, and a message letting you know if you won or not.
+Clicking `Choose Player` in one of the two displayed players, will make you bet on the player you want. After that a modal screen will come up, showing you the FPPG score of that player, and a message letting you know if you won or not.
 
-Just continue your bets until you reach a score of 10, that will be the end of the game. You can then restart the game and enjoy it again.
+Just continue your bets until you reach a score of 10, which will be the end of the game. You can then restart the game and enjoy it again.
+
 
 ## About the Project
 
@@ -34,4 +35,4 @@ Because of the size of the project, I decided to have the test files in the same
 
 ## Possible future technical improvements
 
-In the future I would improve the unit tests, I would also implement using Redux so that I could handle the single state storage and make the components more responsible for what they are doing, instead of most of the logic behing on the App component, as it is now.
+In the future I would improve the unit tests, I would also implement using Redux so that I could handle the single state storage and make the components more responsible for what they are doing, instead of most of the logic being on the App component, as it is now.
