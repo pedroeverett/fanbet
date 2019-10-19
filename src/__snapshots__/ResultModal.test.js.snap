@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultModal should render correctly 1`] = `
+<Modal
+  centered={false}
+  closeOnDimmerClick={true}
+  closeOnDocumentClick={false}
+  dimmer={true}
+  eventPool="Modal"
+>
+  <Header
+    content="Your result this time was..."
+    icon="clipboard"
+  />
+  <ModalContent>
+    <ModalDescription>
+      <Header />
+      <h4>
+        Your player FPPG score is: 
+      </h4>
+    </ModalDescription>
+  </ModalContent>
+  <ModalActions>
+    <Button
+      as="button"
+      color="green"
+      inverted={true}
+    />
+  </ModalActions>
+</Modal>
+`;
