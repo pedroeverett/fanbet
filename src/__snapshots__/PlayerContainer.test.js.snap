@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerContainer should render correctly 1`] = `
+<styled.div>
+  <div>
+    <styled.img
+      alt="Stephen"
+      src="https://d17odppiik753x.cloudfront.net/playerimages/nba/9524.png"
+    />
+    <styled.h4>
+      Name: 
+      Stephen
+       
+      Curry
+    </styled.h4>
+  </div>
+  <Button
+    as="button"
+  >
+    Choose Player
+  </Button>
+</styled.div>
+`;
