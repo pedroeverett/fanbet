@@ -127,6 +127,15 @@ class App extends Component {
     this.setSelectedPlayer();
   }
 
+  restartGame(players) {
+    this.setRandomPlayers(players);
+    this.setSelectedPlayer();
+    this.setState({
+      win: null,
+      score: 0
+    });
+  }
+
   render () {
     const { players, randomPlayers , selectedPlayer, score, win } = this.state;
     console.log('selectedPlayer',selectedPlayer);
@@ -149,6 +158,14 @@ class App extends Component {
           fppg={selectedPlayer.fppg}
           message={this.getRandomMessage(win)}
           buttonLabel="Play Again"
+        />}
+        { winner && <ResultModal
+          onClick={() => this.restartGame(players)}
+          open={winner}
+          fppg={selectedPlayer.fppg}
+          message={this.getRandomMessage(win)}
+          winMessage="You have done great. Your total score is 10. Go ahead and play again."
+          buttonLabel="Restart the game"
         />}
       </div>
     );
