@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerContainer from './PlayerContainer';
-import { sampleSize } from 'lodash';
+import ResultModal from './ResultModal';
+import { sample, sampleSize, isEmpty } from 'lodash';
 import styled from 'styled-components';
 import fetch from "node-fetch";
 import './styles.global.css';
@@ -57,6 +58,24 @@ class App extends Component {
     }
   }
 
+  getRandomMessage(win) {
+    const winMessages = [
+      'Great, you have won this round.',
+      'Congrats you are the man!! Keep playing',
+      'Damm, you are the winner'
+    ]
+    const looseMessages = [
+      'Oopss, you lost. Better luck next time',
+      'You lost!! I can see you need to read about your players.. Better luck next time',
+      'You lost. Dont dispair, try again'
+    ]
+    if (win) {
+      return sample(winMessages)
+    } else {
+      return sample(looseMessages)
+    }
+  }
+
   getSecondPlayer(player, randomPlayers) {
     let secondPlayer = {};
     randomPlayers.forEach( randomPlayer => {
@@ -91,15 +110,28 @@ class App extends Component {
     });
   }
 
+  setRandomPlayers(players) {
+    this.setState({
+      randomPlayers: sampleSize(players, 2)
+    });
+  }
+
   handleChoosenPlayer(player) {
     this.setSelectedPlayer(player)
     const secondPlayer = this.getSecondPlayer(player, this.state.randomPlayers);
     this.checkBestPlayer(player, secondPlayer);
   }
 
+  handleClick(players) {
+    this.setRandomPlayers(players);
+    this.setSelectedPlayer();
+  }
+
   render () {
-    const { players, randomPlayers , selectedPlayer, score } = this.state;
+    const { players, randomPlayers , selectedPlayer, score, win } = this.state;
     console.log('selectedPlayer',selectedPlayer);
+    const isSelected = isEmpty(selectedPlayer);
+    const winner = score === 10;
     return (
       <div className="App-main">
         <Header>
@@ -111,6 +143,13 @@ class App extends Component {
             <PlayerContainer player={player} key={index} onClick={() => this.handleChoosenPlayer(player)}/>
           )}
         </PanelWraper>
+        { !isSelected && !winner && <ResultModal
+          onClick={() => this.handleClick(players)}
+          open={!isSelected}
+          fppg={selectedPlayer.fppg}
+          message={this.getRandomMessage(win)}
+          buttonLabel="Play Again"
+        />}
       </div>
     );
   }
